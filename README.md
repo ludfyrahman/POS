@@ -1,1 +1,2 @@
-# POS
+# SIKD
+sistem informasi dokumen
