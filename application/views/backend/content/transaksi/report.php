@@ -14,7 +14,9 @@
         <div class="form-group">
             <label for="">Produk</label>
             <?php 
-                $bar = Input_Helper::postOrOr('barang', (isset($data['barang']) ? $data['barang'] : ""));
+            $end = $this->uri->segment(count($this->uri->segment_array()));
+            // print_r($end);
+                $bar = Input_Helper::postOrOr('barang', $end);
             ?>
             <select name="barang" class="form-control" id="filter_produk" required>
             <option value="">Pilih Barang</option>
