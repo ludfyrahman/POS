@@ -24,9 +24,16 @@
         <?php Response_Helper::part('alert') ?>
         <!-- /.box-header -->
         <!-- <div class="container"> -->
-            <a href="#" data-toggle="modal" data-target="#nambah-stok">
-              <button class="btn btn-primary pull-right">Tambah</button>
-            </a>
+        <!-- <a href="#" data-toggle="modal" data-target="#laporan">
+          <button class="btn btn-primary ">Laporan</button>
+        </a> -->
+        <div class="btn-group pull-right">
+          <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button> -->
+          <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#laporan">Penjualan</button>
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#nambah-stok">Tambah</button>
+        </div>
         <div class="modal fade" id="nambah-stok">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -59,6 +66,41 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade bd-example-modal-xl" id="laporan">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Laporan Penjualan</h4>
+              </div>
+              <!-- <form action="<?= base_url("$this->low/transaksi/".$this->uri->segment(3)) ?>" method="POST"> -->
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="">Tanggal</label>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" placeholder="dari" name="from" id='datepicker1'>
+                      </div>
+                      <div class="col-md-2">
+                        Sampai
+                      </div>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" placeholder="Sampai" name="from" id='datepicker2'>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                  <button type="button" id="filter" class="btn btn-primary">Send</button>
                 </div>
               </form>
             </div>

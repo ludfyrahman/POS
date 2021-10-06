@@ -331,6 +331,18 @@
 
   <script>
     $(function () {
+      $('#datepicker1').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
+        viewMode: "months", 
+        // startDate: new Date()
+      })
+      $('#datepicker2').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
+        viewMode: "months", 
+        // startDate: new Date()
+      })
     <?php 
 // echo $this->uri->segment(2);
 if($this->uri->segment(2) == "dashboard"){

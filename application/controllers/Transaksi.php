@@ -208,4 +208,31 @@ class Transaksi extends CI_Controller {
 			redirect(base_url("$this->low/add"));
 		}
 	}
+	public function filter($from, $to, $id_toko, $id_produk = null){
+		$transaksi = $this->db->query("SELECT t.*, p.nama as pengguna, tok.nama, tok.alamat as toko, pg.nama as pelanggan, pg.alamat as alamat_pelanggan FROM transaksi t 
+		JOIN pengguna p ON t.id_pengguna=p.id 
+		JOIN toko tok ON t.id_toko=tok.id 
+		LEFT JOIN pelanggan pg ON t.id_pelanggan=pg.id
+		where tok.id=$id_toko AND t.tanggal_transaksi BETWEEN '$from' AND '$to'")->result_array();
+		$data['data'] = [];
+		foreach ($transaksi as $t) {
+			$query = "SELECT dt.*, p.nama as produk FROM detail_transaksi dt JOIN produk p ON dt.id_produk=p.id where dt.id_transaksi=$t[id]";
+			if($id_produk!=null){
+				$query.=" AND dt.id_produk=$id_produk";
+			}
+			$detail = $this->db->query($query)->result_array();
+			// $data['detail'] = $detail;
+			$d = $t;
+			$d['detail'] = $detail;
+			$data['data'][] = $d;
+		}
+		$data['produk'] = $this->db->query("SELECT dt.*, p.nama as produk, t.tanggal_transaksi FROM detail_transaksi dt JOIN produk p ON dt.id_produk=p.id JOIN transaksi t ON dt.id_transaksi=t.id where t.id_toko=$id_toko ".($id_produk == null ? "" : " AND p.id=$id_produk")." AND t.tanggal_transaksi BETWEEN '$from' AND '$to' order by t.tanggal_transaksi asc")->result_array();
+		$data['title'] = "Laporan $this->cap";
+		$data['content'] = "$this->low/report";
+		$data['barang'] = $this->db->query("SELECT p.* FROM produk p JOIN stok_toko st ON p.id=st.id_produk GROUP BY st.id_produk")->result_array();
+		// echo "SELECT dt.*, p.nama as produk, t.tanggal_transaksi FROM detail_transaksi dt JOIN produk p ON dt.id_produk=p.id JOIN transaksi t ON dt.id_transaksi=t.id where t.id_toko=$id_toko ".($id_produk == null ? "" : " AND p.id=$id_produk")." AND t.tanggal_transaksi BETWEEN '$from' AND '$to' order by t.tanggal_transaksi asc";
+		// echo '<pre>';
+		// echo json_encode($data);
+		$this->load->view('backend/index',$data);
+	}
 }

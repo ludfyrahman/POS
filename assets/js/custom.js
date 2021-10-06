@@ -31,6 +31,49 @@ $(document).ready(function () {
             }
         });
     });
+
+    // filter laporan
+    $("#datepicker1").change(function(){
+        var val = $(this).val();
+        var val2 = $("#datepicker2").val();
+        
+        if(val2 !=""){
+            // loaddata
+        }
+    })
+    $("#datepicker2").change(function(){
+        var val = $(this).val();
+        var val1 = $("#datepicker1").val();
+        // console.log(val1)
+        if(val1 == ""){
+            alert("tanggal Pertama tidak boleh kosong");
+            $("#datepicker1").focus();
+        }else{
+        }
+    });
+    $("#filter").click(function(){
+        var val1 = $("#datepicker1").val();
+        var val2 = $("#datepicker2").val();
+        var url      = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+        // console.log(url);
+        window.location.href = BASEURL+"transaksi/filter/"+val1+"/"+val2+"/"+url;
+    });
+    $("#filter_produk").change(function(){
+        var val = $(this).val();
+        var count = window.location.href.split('/');
+        if(count.length == 10){
+            window.location.href = window.location.href+"/"+val;
+        }else{
+            count[10] = val;
+            count.join('/');
+            originalArray =count;
+            separator = '/';
+            implodedArray = originalArray.join(separator);
+  
+            window.location.href = implodedArray;
+        }
+    })
+    // end filter laporan
     $("#tipe").change(function(){
         var val = $(this).val();
         console.log(val);
@@ -131,5 +174,5 @@ $(document).ready(function () {
     $(".delete").click(function(){
         return confirm("apakah anda yakin ???");
     });
-    $(".table").DataTable();
+    $("[class=table]").DataTable();
 });
