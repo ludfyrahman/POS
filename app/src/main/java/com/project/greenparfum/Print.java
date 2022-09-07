@@ -1,6 +1,7 @@
 package com.project.greenparfum;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -16,6 +17,7 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +43,7 @@ import com.project.greenparfum.Config.ServerAccess;
 import com.project.greenparfum.Model.StrukModel;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import com.project.greenparfum.async.AsyncBluetoothEscPosPrint;
@@ -88,6 +91,33 @@ public class Print extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_print);
+        pd = new ProgressDialog(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.back_primary);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        this.list = new ArrayList();
+        ((Button) findViewById(R.id.button_bluetooth_browse)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                browseBluetoothDevice();
+            }
+        });
+        ((Button) findViewById(R.id.button_bluetooth)).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                printBluetooth();
+            }
+        });
+        this.show = (Button) findViewById(R.id.show);
+        this.show.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                show();
+            }
+        });
+        loadJson();
     }
 
     /* access modifiers changed from: private */

@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     implementation 'com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.1.2'
